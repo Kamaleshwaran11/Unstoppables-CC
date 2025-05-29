@@ -15,6 +15,54 @@
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
+      /* Responsive styles for mobile and desktop */
+      @media (max-width: 767.98px) {
+        .site-navbar {
+          padding: 10px 0;
+        }
+        .site-logo img {
+          max-width: 120px;
+        }
+        .slide-one-item .site-blocks-cover {
+          min-height: 250px;
+          background-position: center;
+        }
+        .gallery-img {
+          height: 140px;
+        }
+        .player-stats-table th, .player-stats-table td {
+          font-size: 0.95rem;
+          padding: 0.4rem;
+        }
+        .nav-tabs .nav-link {
+          font-size: 0.95rem;
+          padding: 0.5rem 0.7rem;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .site-navbar {
+          padding: 20px 0;
+        }
+        .site-logo img {
+          max-width: 180px;
+        }
+        .slide-one-item .site-blocks-cover {
+          min-height: 400px;
+          background-position: top center;
+        }
+        .gallery-img {
+          height: 200px;
+        }
+        .player-stats-table th, .player-stats-table td {
+          font-size: 1.1rem;
+          padding: 0.75rem;
+        }
+        .nav-tabs .nav-link {
+          font-size: 1.1rem;
+          padding: 0.75rem 1.2rem;
+        }
+      }
       .player-stats-table th, .player-stats-table td { text-align: center; }
       .social-icons a { margin: 0 10px; color: #222; font-size: 1.5rem; }
       .gallery-img { width: 100%; height: 200px; object-fit: cover; }
@@ -46,7 +94,7 @@
         <nav class="site-navigation position-relative text-right bg-black text-md-right" role="navigation">
           <div class="container position-relative">
             <div class="site-logo">
-              <a href="index.html"><img src="images/logo.png" alt=""></a>
+              <a href="../index.html"><img src="images/logo.png" alt=""></a>
             </div>
             <div class="d-inline-block d-md-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
             <ul class="site-menu js-clone-nav d-none d-md-block">
@@ -76,6 +124,7 @@
           <div class="row">
             <div class="col-md-12 text-center mb-5">
               <h2 class="text-black">KAMALESH - ALL ROUNDER</h2>
+              
             </div>
           </div>
           <!-- Player Stats -->
