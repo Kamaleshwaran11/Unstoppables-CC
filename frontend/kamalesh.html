@@ -18,6 +18,7 @@
       /* Responsive styles for mobile and desktop */
       @media (max-width: 767.98px) {
         .site-navbar {
+          
           padding: 10px 0;
         }
         .site-logo img {
@@ -28,6 +29,7 @@
           background-position: center;
         }
         .gallery-img {
+          
           height: 140px;
         }
         .player-stats-table th, .player-stats-table td {
@@ -41,13 +43,16 @@
       }
 
       @media (min-width: 768px) {
+        
         .site-navbar {
+          background-color: #000;
           padding: 20px 0;
         }
         .site-logo img {
           max-width: 180px;
         }
         .slide-one-item .site-blocks-cover {
+
           min-height: 400px;
           background-position: top center;
         }
@@ -108,16 +113,30 @@
           </div>
         </nav>
       </header>
-      <div class="slide-one-item home-slider owl-carousel">
-        <div class="site-blocks-cover overlay" style="background-image: url(images/kamalesh.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
-          <div class="container">
-            <div class="row align-items-center justify-content-start">
-              <div class="col-md-6 text-center text-md-left" data-aos="fade-up" data-aos-delay="400">
-                <h1 class="bg-text-line">KAMALESH</h1>
-              </div>
+      <div class="container-fluid mt-5 mb-5 px-0">
+        <!-- Player Profile ID Card Style (Full Width) -->
+        <div class="d-flex justify-content-center">
+          <div class="card shadow-lg w-100" style="border-radius: 18px; overflow: hidden; background: #f8f9fa;">
+        <div class="row no-gutters" style="min-height: 350px;">
+          <!-- Left: Full Height Image -->
+          <div class="col-md-5 p-0" style="background: #222; min-height: 350px;">
+            <img src="images/kamalesh.jpg" alt="Kamalesh" class="img-fluid h-100 w-100" style="object-fit: cover; min-height: 100%; height: 100%;">
+          </div>
+          <!-- Right: Info -->
+          <div class="col-md-7 d-flex align-items-center">
+            <div class="card-body py-4 px-4 w-100">
+          <h3 class="card-title mb-2" style="font-weight: 700; letter-spacing: 1px;">KAMALESH</h3>
+          <h6 class="mb-3 text-muted" style="font-weight: 600;">All Rounder</h6>
+          <ul class="list-unstyled mb-3" style="font-size: 1rem;">
+            <li><strong>Date of Birth:</strong> 11/12/2003</li>
+            <li><strong>Batting:</strong> Right Hand Batsman</li>
+            <li><strong>Bowling:</strong> Right Arm Medium</li>
+          </ul>
             </div>
           </div>
-        </div> 
+        </div>
+          </div>
+        </div>
       </div>
       <div class="site-section">
         <div class="container">
@@ -414,14 +433,68 @@
           <!-- Social Page Link -->
           <div class="row">
             <div class="col-md-12 social-page-link">
-              <p>Follow us on our social page: 
-                <a href="https://www.instagram.com/yourprofile" target="_blank">Instagram</a>
+              <p>Follow us on Social Page: 
+                <a href="https://www.instagram.com/mr_tamizhan_03" target="_blank">Instagram</a>
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Footer -->
+<footer class="site-footer border-top">
+  <div class="container">
+    <div class="row text-center text-lg-left">
+      <div class="col-lg-4 mb-5 mb-lg-0 d-flex flex-column align-items-center align-items-lg-start">
+        <div class="mb-4">
+          <img src="images/logofull.png" alt="Unstoppables CC Logo" style="max-width: 240px; width: 100%; height: auto;">
+        </div>
+        
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0 d-flex flex-column align-items-center align-items-lg-start">
+        <div class="row w-100 mb-4">
+          <div class="col-12">
+            <h3 class="footer-heading mb-4">QUICK MENU</h3>
+          </div>
+          <div class="col-6">
+            <ul class="list-unstyled">
+              <li><a href="../index.html">HOME</a></li>
+              <li><a href="gallery.html">GALLERY</a></li>
+              <li><a href="squad.html">SQUAD</a></li>
+              <li><a href="contact.html">CONTACT US</a></li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <ul class="list-unstyled">
+              <li><a href="about.html">ABOUT US</a></li>
+              <li><a href="src/privacy-policy.html">PRIVACY POLICY</a></li>
+              <li><a href="src/Terms-of-use.html">TERMS OF USE</a></li>
+              <li><a href="src/disclaimer.html">DISCLAIMER</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex flex-column align-items-center align-items-lg-start">
+        <h3 class="footer-heading mb-4">FOLLOW US</h3>
+        <div>
+          <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+          <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+          <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+          <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5 mt-5 text-center">
+      <div class="col-md-12">
+        <p>
+          &copy; Unstoppables CC. All rights reserved.<br>
+          Designed by &mdash;
+          <a href="https://kamaleshwaran11.github.io" target="_blank">Kamaleshwaran.S</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
     <!-- JS dependencies -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
