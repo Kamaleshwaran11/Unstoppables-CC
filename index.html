@@ -138,8 +138,316 @@
     </style>
 
     </div>
-    
-          
+    <!-- Automated Player Ranking System -->
+    <div class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <h2 class="text-center mb-4">Player Rankings</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Rank</th>
+                  <th>Player</th>
+                  <th>Matches</th>
+                  <th>Runs</th>
+                  <th>Wickets</th>
+                  <th>MVP</th>
+                </tr>
+              </thead>
+              <tbody id="player-ranking-body">
+                <!-- Rankings will be populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Analytics Dashboards -->
+    <div class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <h2 class="text-center mb-4">Performance Analytics</h2>
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                  <strong>Top Run Scorers</strong>
+                </div>
+                <div class="card-body">
+                  <canvas id="runsChart" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header bg-warning text-white">
+                  <strong>Top Wicket Takers</strong>
+                </div>
+                <div class="card-body">
+                  <canvas id="wicketsChart" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // Sample player data
+    const players = [
+      { name: "Arjun Kumar", matches: 12, runs: 420, wickets: 18 },
+      { name: "Rahul Singh", matches: 14, runs: 390, wickets: 22 },
+      { name: "Vikram Patel", matches: 10, runs: 350, wickets: 10 },
+      { name: "Suresh Iyer", matches: 13, runs: 310, wickets: 25 },
+      { name: "Manoj Das", matches: 11, runs: 280, wickets: 15 }
+    ];
+
+    // Calculate points (simple formula: runs + 20*wickets)
+    players.forEach(p => p.points = p.runs + p.wickets * 20);
+
+    // Sort by points descending
+    const ranked = [...players].sort((a, b) => b.points - a.points);
+
+    // Populate ranking table
+    const tbody = document.getElementById('player-ranking-body');
+    ranked.forEach((p, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${i + 1}</td>
+        <td>${p.name}</td>
+        <td>${p.matches}</td>
+        <td>${p.runs}</td>
+        <td>${p.wickets}</td>
+        <td><strong>${p.points}</strong></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Analytics: Top 5 run scorers
+    const topRuns = [...players].sort((a, b) => b.runs - a.runs).slice(0, 5);
+    const runsCtx = document.getElementById('runsChart').getContext('2d');
+    new Chart(runsCtx, {
+      type: 'bar',
+      data: {
+        labels: topRuns.map(p => p.name),
+        datasets: [{
+          label: 'Runs',
+          data: topRuns.map(p => p.runs),
+          backgroundColor: '#17a2b8'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // Analytics: Top 5 wicket takers
+    const topWickets = [...players].sort((a, b) => b.wickets - a.wickets).slice(0, 5);
+    const wicketsCtx = document.getElementById('wicketsChart').getContext('2d');
+    new Chart(wicketsCtx, {
+      type: 'bar',
+      data: {
+        labels: topWickets.map(p => p.name),
+        datasets: [{
+          label: 'Wickets',
+          data: topWickets.map(p => p.wickets),
+          backgroundColor: '#ffc107'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+      }
+    });
+    </script>
+
+          <div class="container my-5">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <h2 class="text-center mb-4">Live Scores &amp; Upcoming Matches</h2>
+                <!-- Live Scores Section -->
+                <div class="card mb-4">
+                  <div class="card-header bg-success text-white">
+                    <strong>Live Match</strong>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span><strong>Unstoppables CC</strong></span>
+                      <span class="h5 mb-0" id="live-score">142/3 (16.2)</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span><strong>Challengers CC</strong></span>
+                      <span class="h5 mb-0">--</span>
+                    </div>
+                    <div class="mt-2">
+                      <small class="text-muted" id="live-status">Overs: 16.2 | Target: 180 | Status: 2nd Innings in progress</small>
+                    </div>
+                  </div>
+                </div>
+                <!-- Upcoming Matches Section -->
+                <div class="card mb-4">
+                  <div class="card-header bg-primary text-white">
+                    <strong>Upcoming Matches</strong>
+                  </div>
+                  <ul class="list-group list-group-flush" id="upcoming-matches-list">
+                    <!-- Matches will be populated by JS -->
+                  </ul>
+                </div>
+                <!-- Match Creation & Scheduling -->
+                <div class="card mb-4">
+                  <div class="card-header bg-dark text-white">
+                    <strong>Schedule a New Match</strong>
+                  </div>
+                  <div class="card-body">
+                    <form id="match-form" class="row g-2">
+                      <div class="col-md-5 mb-2">
+                        <input type="text" class="form-control" id="teamA" placeholder="Team A" required>
+                      </div>
+                      <div class="col-md-2 text-center mb-2">
+                        <span>vs</span>
+                      </div>
+                      <div class="col-md-5 mb-2">
+                        <input type="text" class="form-control" id="teamB" placeholder="Team B" required>
+                      </div>
+                      <div class="col-md-6 mb-2">
+                        <input type="date" class="form-control" id="matchDate" required>
+                      </div>
+                      <div class="col-md-6 mb-2">
+                        <input type="time" class="form-control" id="matchTime" required>
+                      </div>
+                      <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-success">Add Match</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- Match History -->
+                <div class="card mb-4">
+                  <div class="card-header bg-secondary text-white">
+                    <strong>Match History</strong>
+                  </div>
+                  <ul class="list-group list-group-flush" id="match-history-list">
+                    <!-- History will be populated by JS -->
+                  </ul>
+                </div>
+                <!-- Team Calendar & Notifications -->
+                <div class="card">
+                  <div class="card-header bg-info text-white">
+                    <strong>Team Calendar &amp; Notifications</strong>
+                  </div>
+                  <div class="card-body">
+                    <div id="calendar" class="mb-3"></div>
+                    <div id="notifications" class="alert alert-warning" style="display:none;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+          // Sample upcoming matches
+          let upcomingMatches = [
+            { teamA: "Unstoppables CC", teamB: "King Maker CC", date: "2024-06-15", time: "10:00" },
+            { teamA: "Unstoppables CC", teamB: "Warriors XI", date: "2024-06-22", time: "14:00" },
+            { teamA: "Unstoppables CC", teamB: "Titans CC", date: "2024-06-29", time: "09:00" }
+          ];
+
+          // Sample match history
+          let matchHistory = [
+            { teamA: "Unstoppables CC", teamB: "Challengers CC", date: "2024-06-08", result: "Unstoppables CC won by 5 wickets" },
+            { teamA: "Unstoppables CC", teamB: "Warriors XI", date: "2024-06-01", result: "Warriors XI won by 10 runs" }
+          ];
+
+          // Render upcoming matches
+          function renderUpcomingMatches() {
+            const list = document.getElementById('upcoming-matches-list');
+            list.innerHTML = '';
+            upcomingMatches.forEach(match => {
+              const li = document.createElement('li');
+              li.className = "list-group-item d-flex justify-content-between align-items-center";
+              li.innerHTML = `<span>${match.teamA} vs ${match.teamB}</span>
+                <span class="badge badge-info badge-pill">${new Date(match.date + 'T' + match.time).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</span>`;
+              list.appendChild(li);
+            });
+          }
+          renderUpcomingMatches();
+
+          // Render match history
+          function renderMatchHistory() {
+            const list = document.getElementById('match-history-list');
+            list.innerHTML = '';
+            matchHistory.forEach(match => {
+              const li = document.createElement('li');
+              li.className = "list-group-item";
+              li.innerHTML = `<strong>${match.teamA} vs ${match.teamB}</strong> <br>
+                <small>${new Date(match.date).toLocaleDateString()} - ${match.result}</small>`;
+              list.appendChild(li);
+            });
+          }
+          renderMatchHistory();
+
+          // Match creation form
+          document.getElementById('match-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const teamA = document.getElementById('teamA').value.trim();
+            const teamB = document.getElementById('teamB').value.trim();
+            const date = document.getElementById('matchDate').value;
+            const time = document.getElementById('matchTime').value;
+            if (teamA && teamB && date && time) {
+              upcomingMatches.push({ teamA, teamB, date, time });
+              renderUpcomingMatches();
+              showNotification(`Match scheduled: ${teamA} vs ${teamB} on ${new Date(date + 'T' + time).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}`);
+              this.reset();
+            }
+          });
+
+          // Simple calendar: show upcoming matches as a list
+          function renderCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '<ul class="list-unstyled mb-0">' +
+              upcomingMatches.map(m =>
+                `<li><span class="badge badge-primary">${new Date(m.date).toLocaleDateString()}</span> ${m.teamA} vs ${m.teamB} <small>(${m.time})</small></li>`
+              ).join('') +
+              '</ul>';
+          }
+          renderCalendar();
+
+          // Notification system
+          function showNotification(msg) {
+            const notif = document.getElementById('notifications');
+            notif.textContent = msg;
+            notif.style.display = 'block';
+            setTimeout(() => { notif.style.display = 'none'; }, 4000);
+          }
+
+          // Real-time score updates (simulated)
+          setInterval(() => {
+            // Simulate score update
+            const scoreElem = document.getElementById('live-score');
+            const statusElem = document.getElementById('live-status');
+            if (scoreElem && statusElem) {
+              // Randomly increment runs and balls
+              let score = scoreElem.textContent.match(/(\d+)\/(\d+) \((\d+)\.(\d+)\)/);
+              if (score) {
+                let runs = parseInt(score[1]);
+                let wickets = parseInt(score[2]);
+                let overs = parseInt(score[3]);
+                let balls = parseInt(score[4]);
+                if (Math.random() > 0.7 && wickets < 10) wickets++; // random wicket
+                runs += Math.floor(Math.random() * 3); // random runs
+                balls++;
+                if (balls > 5) { overs++; balls = 0; }
+                scoreElem.textContent = `${runs}/${wickets} (${overs}.${balls})`;
+                statusElem.textContent = `Overs: ${overs}.${balls} | Target: 180 | Status: 2nd Innings in progress`;
+              }
+            }
+          }, 5000);
+          </script>
   
 <!-- Footer -->
 <footer class="site-footer border-top">

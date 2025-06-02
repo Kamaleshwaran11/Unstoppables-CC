@@ -75,62 +75,189 @@
     </div>
 
     
-  <section class="site-section" id="matches-section">
-    <div class="container">
-      <div class="row mb-5 justify-content-center">
-        <div class="col-md-7 text-center">
-          <h2 class="section-title mb-3">Recent Matches</h2>
-          <p class="lead">Check out our latest match results and upcoming fixtures.</p>
-        </div>
-      </div>
-      <div class="row">
-        <!-- Match Card 1 -->
-        <div class="col-md-6 mb-4">
-          <div class="match-card p-4 bg-light rounded shadow-sm h-100">
-            <div class="d-flex align-items-center mb-3">
-              <img src="images/logofull.png" alt="Unstoppables CC" class="mr-3" style="width:48px;height:48px;">
-              <h5 class="mb-0">Unstoppables CC</h5>
-              <span class="mx-2 font-weight-bold">vs</span>
-              <img src="images/opponent1.png" alt="Opponent 1" class="ml-3" style="width:48px;height:48px;">
-              <h5 class="mb-0 ml-2">Challengers XI</h5>
-            </div>
-            <div class="mb-2">
-              <span class="badge badge-success">Completed</span>
-              <span class="ml-3 text-muted">10 June 2024</span>
-            </div>
-            <div>
-              <strong>Result:</strong> Unstoppables CC won by 25 runs
-            </div>
-            <div>
-              <small>Venue: City Cricket Ground</small>
+  <section class="site-section">
+    
+    <div class="container my-5">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <h2 class="text-center mb-4">Live Scores &amp; Upcoming Matches</h2>
+                <!-- Live Scores Section -->
+                <div class="card mb-4">
+                  <div class="card-header bg-success text-white">
+                    <strong>Live Match</strong>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span><strong>Unstoppables CC</strong></span>
+                      <span class="h5 mb-0" id="live-score">142/3 (16.2)</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span><strong>Challengers CC</strong></span>
+                      <span class="h5 mb-0">--</span>
+                    </div>
+                    <div class="mt-2">
+                      <small class="text-muted" id="live-status">Overs: 16.2 | Target: 180 | Status: 2nd Innings in progress</small>
+                    </div>
+                  </div>
+                </div>
+                <!-- Upcoming Matches Section -->
+                <div class="card mb-4">
+                  <div class="card-header bg-primary text-white">
+                    <strong>Upcoming Matches</strong>
+                  </div>
+                  <ul class="list-group list-group-flush" id="upcoming-matches-list">
+                    <!-- Matches will be populated by JS -->
+                  </ul>
+                </div>
+                <!-- Match Creation & Scheduling -->
+                <div class="card mb-4">
+                  <div class="card-header bg-dark text-white">
+                    <strong>Schedule a New Match</strong>
+                  </div>
+                  <div class="card-body">
+                    <form id="match-form" class="row g-2">
+                      <div class="col-md-5 mb-2">
+                        <input type="text" class="form-control" id="teamA" placeholder="Team A" required>
+                      </div>
+                      <div class="col-md-2 text-center mb-2">
+                        <span>vs</span>
+                      </div>
+                      <div class="col-md-5 mb-2">
+                        <input type="text" class="form-control" id="teamB" placeholder="Team B" required>
+                      </div>
+                      <div class="col-md-6 mb-2">
+                        <input type="date" class="form-control" id="matchDate" required>
+                      </div>
+                      <div class="col-md-6 mb-2">
+                        <input type="time" class="form-control" id="matchTime" required>
+                      </div>
+                      <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-success">Add Match</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- Match History -->
+                <div class="card mb-4">
+                  <div class="card-header bg-secondary text-white">
+                    <strong>Match History</strong>
+                  </div>
+                  <ul class="list-group list-group-flush" id="match-history-list">
+                    <!-- History will be populated by JS -->
+                  </ul>
+                </div>
+                <!-- Team Calendar & Notifications -->
+                <div class="card">
+                  <div class="card-header bg-info text-white">
+                    <strong>Team Calendar &amp; Notifications</strong>
+                  </div>
+                  <div class="card-body">
+                    <div id="calendar" class="mb-3"></div>
+                    <div id="notifications" class="alert alert-warning" style="display:none;"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- Match Card 2 -->
-        <div class="col-md-6 mb-4">
-          <div class="match-card p-4 bg-light rounded shadow-sm h-100">
-            <div class="d-flex align-items-center mb-3">
-              <img src="images/logofull.png" alt="Unstoppables CC" class="mr-3" style="width:48px;height:48px;">
-              <h5 class="mb-0">Unstoppables CC</h5>
-              <span class="mx-2 font-weight-bold">vs</span>
-              <img src="images/opponent2.png" alt="Opponent 2" class="ml-3" style="width:48px;height:48px;">
-              <h5 class="mb-0 ml-2">Warriors Club</h5>
-            </div>
-            <div class="mb-2">
-              <span class="badge badge-warning">Upcoming</span>
-              <span class="ml-3 text-muted">17 June 2024</span>
-            </div>
-            <div>
-              <strong>Time:</strong> 3:00 PM
-            </div>
-            <div>
-              <small>Venue: National Stadium</small>
-            </div>
-          </div>
-        </div>
-        <!-- Add more match cards as needed -->
-      </div>
-    </div>
+          <script>
+          // Sample upcoming matches
+          let upcomingMatches = [
+            { teamA: "Unstoppables CC", teamB: "King Maker CC", date: "2024-06-15", time: "10:00" },
+            { teamA: "Unstoppables CC", teamB: "Warriors XI", date: "2024-06-22", time: "14:00" },
+            { teamA: "Unstoppables CC", teamB: "Titans CC", date: "2024-06-29", time: "09:00" }
+          ];
+
+          // Sample match history
+          let matchHistory = [
+            { teamA: "Unstoppables CC", teamB: "Challengers CC", date: "2024-06-08", result: "Unstoppables CC won by 5 wickets" },
+            { teamA: "Unstoppables CC", teamB: "Warriors XI", date: "2024-06-01", result: "Warriors XI won by 10 runs" }
+          ];
+
+          // Render upcoming matches
+          function renderUpcomingMatches() {
+            const list = document.getElementById('upcoming-matches-list');
+            list.innerHTML = '';
+            upcomingMatches.forEach(match => {
+              const li = document.createElement('li');
+              li.className = "list-group-item d-flex justify-content-between align-items-center";
+              li.innerHTML = `<span>${match.teamA} vs ${match.teamB}</span>
+                <span class="badge badge-info badge-pill">${new Date(match.date + 'T' + match.time).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</span>`;
+              list.appendChild(li);
+            });
+          }
+          renderUpcomingMatches();
+
+          // Render match history
+          function renderMatchHistory() {
+            const list = document.getElementById('match-history-list');
+            list.innerHTML = '';
+            matchHistory.forEach(match => {
+              const li = document.createElement('li');
+              li.className = "list-group-item";
+              li.innerHTML = `<strong>${match.teamA} vs ${match.teamB}</strong> <br>
+                <small>${new Date(match.date).toLocaleDateString()} - ${match.result}</small>`;
+              list.appendChild(li);
+            });
+          }
+          renderMatchHistory();
+
+          // Match creation form
+          document.getElementById('match-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const teamA = document.getElementById('teamA').value.trim();
+            const teamB = document.getElementById('teamB').value.trim();
+            const date = document.getElementById('matchDate').value;
+            const time = document.getElementById('matchTime').value;
+            if (teamA && teamB && date && time) {
+              upcomingMatches.push({ teamA, teamB, date, time });
+              renderUpcomingMatches();
+              showNotification(`Match scheduled: ${teamA} vs ${teamB} on ${new Date(date + 'T' + time).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}`);
+              this.reset();
+            }
+          });
+
+          // Simple calendar: show upcoming matches as a list
+          function renderCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '<ul class="list-unstyled mb-0">' +
+              upcomingMatches.map(m =>
+                `<li><span class="badge badge-primary">${new Date(m.date).toLocaleDateString()}</span> ${m.teamA} vs ${m.teamB} <small>(${m.time})</small></li>`
+              ).join('') +
+              '</ul>';
+          }
+          renderCalendar();
+
+          // Notification system
+          function showNotification(msg) {
+            const notif = document.getElementById('notifications');
+            notif.textContent = msg;
+            notif.style.display = 'block';
+            setTimeout(() => { notif.style.display = 'none'; }, 4000);
+          }
+
+          // Real-time score updates (simulated)
+          setInterval(() => {
+            // Simulate score update
+            const scoreElem = document.getElementById('live-score');
+            const statusElem = document.getElementById('live-status');
+            if (scoreElem && statusElem) {
+              // Randomly increment runs and balls
+              let score = scoreElem.textContent.match(/(\d+)\/(\d+) \((\d+)\.(\d+)\)/);
+              if (score) {
+                let runs = parseInt(score[1]);
+                let wickets = parseInt(score[2]);
+                let overs = parseInt(score[3]);
+                let balls = parseInt(score[4]);
+                if (Math.random() > 0.7 && wickets < 10) wickets++; // random wicket
+                runs += Math.floor(Math.random() * 3); // random runs
+                balls++;
+                if (balls > 5) { overs++; balls = 0; }
+                scoreElem.textContent = `${runs}/${wickets} (${overs}.${balls})`;
+                statusElem.textContent = `Overs: ${overs}.${balls} | Target: 180 | Status: 2nd Innings in progress`;
+              }
+            }
+          }, 5000);
+          </script>
   </section>
 
    <!-- Footer -->
