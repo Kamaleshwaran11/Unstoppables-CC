@@ -150,9 +150,10 @@
                   <th>Rank</th>
                   <th>Player</th>
                   <th>Matches</th>
+                  
                   <th>Runs</th>
                   <th>Wickets</th>
-                  <th>MVP</th>
+            
                 </tr>
               </thead>
               <tbody id="player-ranking-body">
@@ -200,11 +201,11 @@
     <script>
     // Sample player data
     const players = [
-      { name: "Arjun Kumar", matches: 12, runs: 420, wickets: 18 },
-      { name: "Rahul Singh", matches: 14, runs: 390, wickets: 22 },
-      { name: "Vikram Patel", matches: 10, runs: 350, wickets: 10 },
-      { name: "Suresh Iyer", matches: 13, runs: 310, wickets: 25 },
-      { name: "Manoj Das", matches: 11, runs: 280, wickets: 15 }
+      { name: "Madhan", matches:12,innings: 12, runs: 420, wickets: 18 },
+      { name: "Parthi", matches: 14, runs: 390, wickets: 22 },
+      { name: "Kamalesh S", matches: 10, runs: 350, wickets: 10 },
+      { name: "Aravind", matches: 13, runs: 310, wickets: 25 },
+      { name: "Lokesh", matches: 11, runs: 280, wickets: 15 }
     ];
 
     // Calculate points (simple formula: runs + 20*wickets)
@@ -221,9 +222,9 @@
         <td>${i + 1}</td>
         <td>${p.name}</td>
         <td>${p.matches}</td>
+        
         <td>${p.runs}</td>
-        <td>${p.wickets}</td>
-        <td><strong>${p.points}</strong></td>
+        <td><strong>${p.wickets}</strong></td>
       `;
       tbody.appendChild(tr);
     });
